@@ -29,6 +29,7 @@ export default function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [routeGeoJSON, setRouteGeoJSON] = useState<any | null>(null);
   const [isNavigating, setIsNavigating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Initial Load
   useEffect(() => {
@@ -39,6 +40,7 @@ export default function Home() {
         setCampusBoundary(bound);
       } catch (e) {
         console.error("Failed to load init data", e);
+        setError("Failed to load initial data. Check backend connection.");
       }
     };
     fetchData();
@@ -47,11 +49,13 @@ export default function Home() {
   // Fetch Buildings when filters change
   useEffect(() => {
     const fetchBuildings = async () => {
+      setError(null);
       try {
         const data = await getBuildings(selectedCategory || undefined, searchQuery);
         setBuildings(data);
       } catch (e) {
         console.error(e);
+        setError("Failed to fetch buildings. Ensure backend is running.");
       }
     };
     fetchBuildings();
@@ -122,14 +126,20 @@ export default function Home() {
                 onSelectCategory={setSelectedCategory} 
             />
             <div className="mt-4 flex-1 overflow-hidden flex flex-col">
-                <BuildingList 
-                    buildings={buildings} 
-                    onSelect={(b) => {
-                        setSelectedBuilding(b);
-                        if (window.innerWidth < 640) setIsSidebarOpen(false);
-                    }}
-                    isLoading={false}
-                />
+                {error ? (
+                  <div className="p-4 mr-4 bg-red-50 text-red-600 text-sm rounded-md border border-red-200">
+                    {error}
+                  </div>
+                ) : (
+                  <BuildingList 
+                      buildings={buildings} 
+                      onSelect={(b) => {
+                          setSelectedBuilding(b);
+                          if (window.innerWidth < 640) setIsSidebarOpen(false);
+                      }}
+                      isLoading={false}
+                  />
+                )}
             </div>
         </div>
       </div>

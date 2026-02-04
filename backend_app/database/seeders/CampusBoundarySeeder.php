@@ -30,8 +30,8 @@ class CampusBoundarySeeder extends Seeder
         // Or just a bbox for simplicity as requested 'bbox (minLat, minLng, maxLat, maxLng)'
         // Let's store maxBounds style: southWest, northEast
         $maxBounds = [
-            'southWest' => ['lat' => 7.120000, 'lng' => 39.995000],
-            'northEast' => ['lat' => 7.135000, 'lng' => 40.010000]
+            'southWest' => ['lat' => 7.130000, 'lng' => 39.990000], // Approx SW of Robe Campus area
+            'northEast' => ['lat' => 7.160000, 'lng' => 40.020000]  // Approx NE
         ];
 
         CampusBoundary::create([

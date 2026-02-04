@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline, Polygon } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline, Polygon, LayersControl } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
@@ -56,8 +56,8 @@ function MapController({ selectedBuilding, routeGeoJSON, campusBoundary }: { sel
 
 export default function MapView({ buildings, selectedBuilding, onMarkerClick, campusBoundary, routeGeoJSON }: MapViewProps) {
   
-  // Default center (MWU Robe approx)
-  const defaultCenter: [number, number] = [7.125000, 40.000000];
+  // Default center (MWU Robe approx) - Updated to new Main Gate
+  const defaultCenter: [number, number] = [7.142528, 39.996432];
 
   return (
     <MapContainer
@@ -66,10 +66,21 @@ export default function MapView({ buildings, selectedBuilding, onMarkerClick, ca
       style={{ height: '100%', width: '100%' }}
       maxZoom={19}
     >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
+      <LayersControl position="topright">
+        <LayersControl.BaseLayer checked name="Street Map">
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+        </LayersControl.BaseLayer>
+
+        <LayersControl.BaseLayer name="Satellite">
+          <TileLayer
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+            attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+          />
+        </LayersControl.BaseLayer>
+      </LayersControl>
       
       <MapController selectedBuilding={selectedBuilding} routeGeoJSON={routeGeoJSON} campusBoundary={campusBoundary} />
 

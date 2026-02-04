@@ -19,65 +19,65 @@ class BuildingSeeder extends Seeder
         $cafeCat = Category::where('slug', 'cafes')->first();
         $dormCat = Category::where('slug', 'dorms')->first();
 
-        // Coordinates around MWU (Main Campus, Robe)
-        // Main Gate (approx)
+        // Coordinates around MWU (Main Campus, Robe) - Updated real Main Gate
+        // Main Gate (Real Location: https://maps.app.goo.gl/j9ntbt9RQ2aMBtiY8 -> 7.142528, 39.996432)
         Building::create([
             'category_id' => $adminCat->id,
             'name' => 'Main Gate',
-            'latitude' => 7.125000,
-            'longitude' => 40.000000,
+            'latitude' => 7.142528,
+            'longitude' => 39.996432,
             'description' => 'The main entrance to the university campus.',
-            'image_url' => 'http://localhost:8000/storage/buildings/main_gate.jpg',
+            'image_url' => 'http://localhost:8000/storage/buildings/main_gate.jfif',
         ]);
 
-        // Admin Building
+        // Admin Building (Real Location from Map)
         Building::create([
             'category_id' => $adminCat->id,
             'name' => 'Admin Building',
-            'latitude' => 7.126500,
-            'longitude' => 40.001500,
+            'latitude' => 7.142803,
+            'longitude' => 39.997130,
             'description' => 'Office of the President and administrative staff.',
-            'image_url' => 'http://localhost:8000/storage/buildings/admin.jpg',
+            'image_url' => 'http://localhost:8000/storage/buildings/admin.jfif',
         ]);
 
-        // Main Library
+        // Main Library (Real Location)
         Building::create([
             'category_id' => $libCat->id,
             'name' => 'Main Library',
-            'latitude' => 7.127000,
-            'longitude' => 40.000500,
+            'latitude' => 7.143529,
+            'longitude' => 39.999526,
             'description' => '24/7 student library with digital resources.',
-            'image_url' => 'http://localhost:8000/storage/buildings/library.jpg',
+            'image_url' => 'http://localhost:8000/storage/buildings/library.jfif',
         ]);
 
-        // Student Cafe
+        // Student Cafe (Real Location)
         Building::create([
             'category_id' => $cafeCat->id,
             'name' => 'Student Peace Cafe',
-            'latitude' => 7.125500,
-            'longitude' => 40.002000,
-            'description' => 'Affordable meals and coffee.',
-            'image_url' => 'http://localhost:8000/storage/buildings/cafe.jpg',
+            'latitude' => 7.144170,
+            'longitude' => 39.999399,
+            'description' => 'Cristian cafe.',
+            'image_url' => 'http://localhost:8000/storage/buildings/cafe.jfif',
         ]);
 
-        // Dorm Block A
+        // Dorm Block A (Real Location)
         Building::create([
             'category_id' => $dormCat->id,
             'name' => 'Block A (Men\'s Dorm)',
-            'latitude' => 7.124500,
-            'longitude' => 40.003000,
-            'description' => 'First year student dormitory.',
-            'image_url' => 'http://localhost:8000/storage/buildings/dorm_a.jpg',
+            'latitude' => 7.142183,
+            'longitude' => 39.999939,
+            'description' => 'male student dormitory.',
+            'image_url' => 'http://localhost:8000/storage/buildings/dorm_a.jfif',
         ]);
 
-        // Dorm Block B
+        // Dorm Block B (Real Location)
         Building::create([
             'category_id' => $dormCat->id,
             'name' => 'Block B (Women\'s Dorm)',
-            'latitude' => 7.124000,
-            'longitude' => 40.002800,
-            'description' => 'Senior student dormitory.',
-            'image_url' => 'http://localhost:8000/storage/buildings/dorm_b.jpg',
+            'latitude' => 7.141791,
+            'longitude' => 39.998856,
+            'description' => 'female student dormitory.',
+            'image_url' => 'http://localhost:8000/storage/buildings/dorm_b.jfif',
         ]);
     }
 }
